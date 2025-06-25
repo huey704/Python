@@ -26,20 +26,31 @@ for section in sorted(config.sections()):
     raw_lap_time = int(config[section]['TIME'])
     formatted_lap_time = convertMiliseconds(raw_lap_time)
 
+    if '@' in section:
+        split_car_track = section.split('@')
+        (split_car_track[1])  # track
+        (split_car_track[0])  # car
+
     # converts the unix timestamp to a readable set of numbers YEAR, MONTH, DATE
     date_of_race = datetime.datetime.fromtimestamp(date_of_race, datetime.UTC)
 
+    # After options menu choice
     # allows the text to be printed with editted size, font, and bold and location to be on the left side
-    # car_track_label = Label(
-    #     root, text=f'\n Car & Track: {section}', anchor='w', justify=LEFT, font=('Arial', 10, 'bold'))
-    # car_track_label.pack(anchor='w', padx=20, pady=2)
+    track_label = Label(
+        root, text=f'\n Track: {split_car_track[1]}', anchor='w', justify=LEFT, font=('Arial', 10, 'bold'))
+    track_label.pack(anchor='w', padx=20, pady=2)
 
-    # date_time_label = Label(
-    #     root, text=f'\n Date and Time of Race: {date_of_race}', anchor='w', justify=LEFT, font=('Arial', 10, 'bold'))
-    # date_time_label.pack(anchor='w', padx=20, pady=2)
+    car_label = Label(
+        root, text=f'\n Car: {split_car_track[0]}', anchor='w', justify=LEFT, font=('Arial', 10, 'bold'))
+    car_label.pack(anchor='w', padx=20, pady=2)
 
-    # lap_time_label = Label(
-    #     root, text=f'\n Lap Time: {formatted_lap_time}', anchor='w', justify=LEFT, font=('Arial', 10, 'bold'))
-    # lap_time_label.pack(anchor='w', padx=20, pady=2)
+    date_time_label = Label(
+        root, text=f'\n Date and Time of Race: {date_of_race}', anchor='w', justify=LEFT, font=('Arial', 10, 'bold'))
+    date_time_label.pack(anchor='w', padx=20, pady=2)
+
+    lap_time_label = Label(
+        root, text=f'\n Lap Time: {formatted_lap_time}', anchor='w', justify=LEFT, font=('Arial', 10, 'bold'))
+    lap_time_label.pack(anchor='w', padx=20, pady=2)
+
 
 root.mainloop()
